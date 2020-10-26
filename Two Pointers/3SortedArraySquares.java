@@ -18,16 +18,11 @@ Output: [0 1 1 4 9]
 class SortedArraySquares {
 
   public static int[] makeSquares(int[] arr) {
-    int[] squares = new int[arr.length];
+     int[] squares = new int[arr.length];
     int i=squares.length-1;
     int lo=0,hi=arr.length-1;
-    while(lo<hi) {
-      if(arr[lo]*arr[lo]==arr[hi]*arr[hi]) {
-        squares[i--]=arr[lo]*arr[lo];
-        squares[i--]=arr[hi]*arr[hi];
-        lo++;
-        hi--;
-      }else if(arr[lo]*arr[lo]>arr[hi]*arr[hi]) {
+    while(lo<=hi) {
+       if(arr[lo]*arr[lo]>arr[hi]*arr[hi]) {
         squares[i--]=arr[lo]*arr[lo];
         lo++;
       }else {
