@@ -20,6 +20,7 @@ Output: [5, 6, 9]
 
 ***************/
 import java.util.*;
+import java.util.stream.Collectors;
 
 class Entry {
   int key;
@@ -34,13 +35,35 @@ class Entry {
 class KClosestElements {
 
   public static List<Integer> findClosestElements(int[] arr, int k, Integer x) {
-    List<Integer> input=new ArrayList<>();
-        for(int num:arr)
-            input.add(num);
-        Collections.sort(input,(a,b)->(Math.abs(a-x)-Math.abs(b-x)));
-        List<Integer> output=input.subList(0,k);
-        Collections.sort(output);
-        return output;
+    int low=0;
+     int high=arr.length-k;
+     while(low<high) {
+         int mid=low+(high-low)/2;
+         if(x-arr[mid]>arr[mid+k]-x)
+             low=mid+1;
+         else
+             high=mid;
+     }
+        
+        return Arrays.stream(arr,low,low+k).boxed().collect(Collectors.toList());
+  }
+
+  public static int binarySearch(int[] arr,int target) {
+    int low=0;
+    int high=arr.length-1;
+    while(low<=high) {
+      int mid=low+(high-low)/2;
+      if(arr[mid]==target)
+      return mid;
+      else if(arr[mid]>target)
+      high=mid-1;
+      else
+      low=mid+1;
+    }
+    if(low>0)
+    return low-1;
+    else
+    return low;
   }
 
   public static void main(String[] args) {
